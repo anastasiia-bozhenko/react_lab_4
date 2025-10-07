@@ -1,5 +1,14 @@
+import { useState } from "react";
 
-function TodoItem({ todo, onToggle, onDelete }) {
+function TodoItem({ todo, onToggle, onDelete, onEdit }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [newTitle, setNewTitle] = useState(todo.todo);
+
+  const handleSave = () => {
+    onEdit(todo.id, newTitle);
+    setIsEditing(false);
+  };
+
   return (
     <tr
       style={{
@@ -8,16 +17,30 @@ function TodoItem({ todo, onToggle, onDelete }) {
       }}
     >
       <td>{todo.id}</td>
-      <td>{todo.todo}</td>
       <td>
-        <input
-          type="checkbox"
-          checked={todo.completed}
-          onChange={onToggle}
-        />
+        {isEditing ? (
+          <input
+            type="text"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSave()}
+          />
+        ) : (
+          todo.todo
+        )}
       </td>
       <td>
-        <button onClick={onDelete}>Delete</button>
+        <input type="checkbox" checked={todo.completed} onChange={onToggle} />
+      </td>
+      <td style={{ display: "flex", gap: "6px", justifyContent: "center" }}>
+        {isEditing ? (
+          <button onClick={handleSave}>Save</button>
+        ) : (
+          <button onClick={() => setIsEditing(true)}>Edit</button>
+        )}
+        <button onClick={onDelete} style={{ marginLeft: "5px" }}>
+          Delete
+        </button>
       </td>
     </tr>
   );
