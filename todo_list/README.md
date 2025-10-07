@@ -17,4 +17,4 @@ If you are developing a production application, we recommend using TypeScript wi
 
 ## Component tree
 
-![component_tree](../todo_list/src/assets/Component%20tree%20todo%20list2.svg)
+![component_tree](../todo_list/src/assets/ComponentTreeTodoList.svg)
