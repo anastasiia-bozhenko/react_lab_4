@@ -1,0 +1,32 @@
+.todo-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.todo-actions button {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.todo-actions button:first-child {
+  background-color: #ffc107;
+  color: black;
+}
+
+.todo-actions button:first-child:hover {
+  background-color: #e0a800;
+}
+
+.todo-actions button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+.todo-actions button:last-child:hover {
+  background-color: #b02a37;
+}

@@ -1,6 +1,7 @@
 import useTodos from "../hooks/useTodos";
 import TodoItem from "./TodoItem";
 import AddTodoForm from "./AddTodoForm";
+import "./TodoListContainer.css";
 
 function TodoListContainer() {
   const {
@@ -24,7 +25,7 @@ function TodoListContainer() {
   if (error) return <div style={{ color: "red" }}>Error: {error}</div>;
 
   return (
-    <div style={{ width: "600px", margin: "0 auto", textAlign: "center" }}>
+    <div className="todo-container">
       <h2>Todo List</h2>
 
       <AddTodoForm onAdd={addTodo} />
@@ -34,10 +35,10 @@ function TodoListContainer() {
         placeholder="Search todos..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ marginBottom: "10px", padding: "5px" }}
+        className="todo-search"
       />
 
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+      <table className="todo-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -59,11 +60,11 @@ function TodoListContainer() {
         </tbody>
       </table>
 
-      <div style={{ marginTop: "10px" }}>
+      <div className="todo-pagination">
         <button onClick={goToPrevPage} disabled={currentPage === 1}>
           Previous
         </button>
-        <span style={{ margin: "0 10px" }}>
+        <span>
           Page {currentPage} of {Math.ceil(totalTodos / limitPerPage)}
         </span>
         <button

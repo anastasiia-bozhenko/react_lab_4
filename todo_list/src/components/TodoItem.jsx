@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./TodoItem.css";
 
 function TodoItem({ todo, onToggle, onDelete, onEdit }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -11,10 +12,7 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
 
   return (
     <tr
-      style={{
-        textDecoration: todo.completed ? "line-through" : "none",
-        color: todo.completed ? "gray" : "black",
-      }}
+      className={`todo-row ${todo.completed ? "completed" : ""}`}
     >
       <td>{todo.id}</td>
       <td>
@@ -24,23 +22,27 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSave()}
+            className="todo-edit-input"
           />
         ) : (
           todo.todo
         )}
       </td>
       <td>
-        <input type="checkbox" checked={todo.completed} onChange={onToggle} />
+        <input
+          type="checkbox"
+          checked={todo.completed}
+          onChange={onToggle}
+          className="todo-checkbox"
+        />
       </td>
-      <td style={{ display: "flex", gap: "6px", justifyContent: "center" }}>
+      <td className="todo-actions">
         {isEditing ? (
-          <button onClick={handleSave}>Save</button>
+          <button className="todo-btn save" onClick={handleSave}>Save</button>
         ) : (
-          <button onClick={() => setIsEditing(true)}>Edit</button>
+          <button className="todo-btn edit" onClick={() => setIsEditing(true)}>Edit</button>
         )}
-        <button onClick={onDelete} style={{ marginLeft: "5px" }}>
-          Delete
-        </button>
+        <button className="todo-btn delete" onClick={onDelete}>Delete</button>
       </td>
     </tr>
   );
